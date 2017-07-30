@@ -37,6 +37,11 @@ services:
       GF_DATABASE_PASSWORD: password
       GF_DATABASE_MAX_IDLE_CONN: 20
       GF_DATABASE_MAX_OPEN_CONN: 20
+      GF_SESSION_PROVIDER: memcache
+      GF_SESSION_PROVIDER_CONFIG: memcached:11211
+      # GF_SESSION_COOKIE_NAME: 
+      # GF_SESSION_COOKIE_SECURE:
+      # GF_SESSION_SESSION_LIFE_TIME:
 
   graphite:
     image: hopsoft/graphite-statsd
@@ -46,6 +51,11 @@ services:
       - 2023-2024:2023-2024
       - 8125:8125/udp
       - 8126:8126
+
+  memcached:
+    image: memcached:alpine
+    ports:
+      - 11211:11211
 
 volumes:
   pgdata_grafana:
