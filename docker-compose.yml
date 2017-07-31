@@ -1,5 +1,16 @@
 version: '2.1'
+
 services:
+  proxy:
+    privileged: true
+    image: dockercloud/haproxy:latest
+    ports:
+      - 8080:80
+    links:
+      - grafana
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   db:
     image: postgres:alpine
     volumes:
@@ -8,7 +19,7 @@ services:
       - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
-      interval: 60s
+      interval: 10s
       timeout: 5s
       retries: 5
     environment:
@@ -21,12 +32,12 @@ services:
       db:
         condition: service_healthy
     image: grafana/grafana
-    ports:
-      - 3000:3000
+    expose:
+      - 3000
     environment:
       GF_SECURITY_ADMIN_PASSWORD: password
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_LOGIN_REMEMBER_DAYS:
+      # GF_SECURITY_LOGIN_REMEMBER_DAYS:
       GF_USERS_ALLOW_ORG_CREATE: "false"
       GF_SERVER_HTTP_PORT: 3000
       # GF_SERVER_HTTP_ADDR: localhost
@@ -46,7 +57,7 @@ services:
   graphite:
     image: hopsoft/graphite-statsd
     ports:
-      - 80:80
+      - 8081:80
       - 2003-2004:2003-2004
       - 2023-2024:2023-2024
       - 8125:8125/udp
@@ -54,8 +65,9 @@ services:
 
   memcached:
     image: memcached:alpine
-    ports:
-      - 11211:11211
+    expose:
+      - 11211
 
 volumes:
   pgdata_grafana:
+
