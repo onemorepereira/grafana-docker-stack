@@ -14,15 +14,21 @@ then
   docker create -v /dbdata --name pgdata_grafana postgres:alpine;
 fi
 
+# Create a container volume to persist Graphite data
+if [[ -z $(docker ps -a |grep graphite_data |awk '{print $1}') ]]
+then
+  docker create -v /opt/graphite/storage --name graphite_data hopsoft/graphite-statsd;
+fi
+
 # Tear down pre-existing stacks
 docker-compose -f ../docker-compose.yml down;
 
 # Compose up our stack!
-docker-compose -f ../docker-compose.yml up &
+docker-compose -f ../docker-compose.yml up --scale grafana=2 &
 
 # Wait 10 seconds
 sleep 10;
 
 # Launch himond and start sending metrics to Graphite/StatsD
-sudo ./himond localhost 8125 wlp3s0;
+sudo ./himond localhost 8125 wlp59s0 &
 

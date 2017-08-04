@@ -24,6 +24,15 @@ Currently, the project is comprised of the following products:
 - **himond**
   - Cool, little system metric emmitter for StatsD, written in C++
   - https://github.com/bartoffw/himond
+- **Memcached**
+  - In-memory key-value store; using this pup to share Grafana session with multiple Grafana container/services
+  - https://memcached.org/
+  - https://hub.docker.com/_/memcached/
+- **HAProxy**
+  - Lightweight TCP/HTTP load balancer; handy to scale Grafana behind it and test session persistence
+  - http://www.haproxy.org/
+  - https://hub.docker.com/r/dockercloud/haproxy/
+  - https://github.com/docker/dockercloud-haproxy
 
 ### Requirements ###
 - Docker 1.13 (tested on Docker 1.13.1)
@@ -52,6 +61,6 @@ What license?!
 
 ### In the future ###
 - [ ] I'd like to add a Docker Swarm equivalent (Stack)
-- [ ] I'd like to add support for session data to be stored on MemcacheD (more Dockers!)
+- [x] I'd like to add support for session data to be stored on MemcacheD (more Dockers!)
 - [ ] I'd like to ship more backend data sources & test emitters for each
 - [ ] Include better, templated dashboards to demo Grafana and the underlying TSDBs
