@@ -63,6 +63,8 @@ services:
       - 2023-2024:2023-2024
       - 8125:8125/udp
       - 8126:8126
+    volumes:
+      - graphite_data:/opt/graphite/storage
 
   memcached:
     image: memcached:alpine
@@ -71,4 +73,4 @@ services:
 
 volumes:
   pgdata_grafana:
-
+  graphite_data:
