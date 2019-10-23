@@ -4,8 +4,10 @@ I started putting together this small docker-compose stack so I could easily pla
 
 So, while this is definitely rough around the edges, understand that this is mainly for me. But, if you find it useful, be my guest and fork it and make it your own. Or if you are feeling collaborative, go ahead and contribute and help me extend it and plug in more back ends (Prometheus, InfluxDB, OpenTSDB) or point me to better, sleeker, slimmer metric collection agents.
 
-### Project Description ###
+## Project Description ##
+
 Currently, the project is comprised of the following products:
+
 - **Grafana**
   - This is the main platform highlight
   - https://grafana.com/
@@ -34,32 +36,37 @@ Currently, the project is comprised of the following products:
   - https://hub.docker.com/r/dockercloud/haproxy/
   - https://github.com/docker/dockercloud-haproxy
 
-### Requirements ###
+## Requirements ##
+
 - Docker 1.13 (tested on Docker 1.13.1)
 - Docker Compose 1.14 (tested on Docker Compose 1.14.0)
 - Linux Kernel 4.x (tested on Fedora 26 w/4.11.10)
 
-### Instructions ###
+## Instructions ##
 
 If you happen to be on any of the most recent 4.x Linux Kernels, you should be able to just check out this repo and start the stack by running
 
 ```bash
-$ cd bin && ./start-demo.sh
+cd bin && ./start-demo.sh
 
 ```
 
 Stopping the stack is as simple as
+
 ```bash
-$ ./stop-demo.sh
+./stop-demo.sh
 ```
 
-### Notes ###
+## Notes ##
+
 If you find problems, have any suggestions, discover mistakes or typos or, whatever, feel free to open a pull request and / or open an issue. I won't bite --that's what my dogs are for!
 
-### License ###
+## License ##
+
 What license?!
 
-### In the future ###
+## In the future ##
+
 - [ ] I'd like to add a Docker Swarm equivalent (Stack)
 - [x] I'd like to add support for session data to be stored on MemcacheD (more Dockers!)
 - [ ] I'd like to ship more backend data sources & test emitters for each
